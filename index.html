@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anant Gupta - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP Core + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader__content">
+            <div class="preloader__text">
+                <span class="preloader__letter">A</span>
+                <span class="preloader__letter">N</span>
+                <span class="preloader__letter">A</span>
+                <span class="preloader__letter">N</span>
+                <span class="preloader__letter">T</span>
+            </div>
+            <div class="preloader__line"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor">
+        <div class="cursor__inner"></div>
+    </div>
+
+    <!-- Advanced Professional Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar__container">
+            <div class="navbar__brand">
+                <a href="#hero" class="navbar__logo">
+                    <span class="navbar__logo-text">Anant</span>
+                    <span class="navbar__logo-dot"></span>
+                </a>
+            </div>
+            
+            <div class="navbar__menu" id="navbarMenu">
+                <ul class="navbar__nav">
+                    <li class="navbar__item">
+                        <a href="#hero" class="navbar__link" data-text="Home">Home</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#about" class="navbar__link" data-text="About">About</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#section-4" class="navbar__link" data-text="Skills">Skills</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#works" class="navbar__link" data-text="Work">Work</a>
+                    </li>
+                    <li class="navbar__item">
+                        <a href="#footer" class="navbar__link" data-text="Contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="navbar__actions">
+                <!-- <a href="/Resume/Flexible/Anant Gupta Resume.pdf" target="_blank" class="navbar__cta">
+                    <span class="navbar__cta-text">Resume</span>
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-7 7h10a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                    </svg>
+                </a> -->
+
+                <div class="navbar__actions">
+    <a href="resume.pdf" download="Anant_Gupta_Resume.pdf" class="navbar__cta">
+        <span class="navbar__cta-text">Resume</span>
+        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-7 7h10a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+        </svg>
+    </a>
+</div>
+            </div>
+            
+            <div class="navbar__toggle" id="navbarToggle">
+                <span class="navbar__toggle-line"></span>
+                <span class="navbar__toggle-line"></span>
+                <span class="navbar__toggle-line"></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Award-Winning Professional Hero Section -->
+        <section class="hero" id="hero">
+            <!-- Animated Background -->
+            <div class="hero__background">
+                <div class="hero__gradient"></div>
+                <div class="hero__floating-elements">
+                    <div class="hero__particle hero__particle--1"></div>
+                    <div class="hero__particle hero__particle--2"></div>
+                    <div class="hero__particle hero__particle--3"></div>
+                </div>
+            </div>
+            
+            <div class="hero__container">
+
+
+                <!-- Bento Grid Layout -->
+                <div class="hero__bento-grid">
+                    <!-- Main Identity Card -->
+                    <div class="hero__card hero__card--main" data-magnetic>
+                        <div class="hero__card-content">
+                            <div class="hero__greeting">
+                                <span class="hero__greeting-text">Hi, I'm</span>
+                            </div>
+                            <h1 class="hero__name">
+                                <span class="hero__name-line">
+                                    <span class="hero__char" data-char="A">A</span>
+                                    <span class="hero__char" data-char="n">n</span>
+                                    <span class="hero__char" data-char="a">a</span>
+                                    <span class="hero__char" data-char="n">n</span>
+                                    <span class="hero__char" data-char="t">t</span>
+                                </span>
+                                <span class="hero__name-line">
+                                    <span class="hero__char" data-char="G">G</span>
+                                    <span class="hero__char" data-char="u">u</span>
+                                    <span class="hero__char" data-char="p">p</span>
+                                    <span class="hero__char" data-char="t">t</span>
+                                    <span class="hero__char" data-char="a">a</span>
+                                </span>
+                            </h1>
+                            <div class="hero__role-badge">
+                                <span class="hero__role-text">AI Full-Stack Developer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Card -->
+                    <div class="hero__card hero__card--experience" data-magnetic>
+                        <div class="hero__card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <div class="hero__card-content">
+                            <div class="hero__card-number" data-count="1">1+</div>
+                            <div class="hero__card-label">Years Experience</div>
+                        </div>
+                        <div class="hero__card-glow"></div>
+                    </div>
+
+                    <!-- Projects Card -->
+                    <div class="hero__card hero__card--projects" data-magnetic>
+                        <div class="hero__card-icon">
+                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                        </div>
+                        <div class="hero__card-content">
+                            <div class="hero__card-number" data-count="10">10+</div>
+                            <div class="hero__card-label">Projects Built</div>
+                        </div>
+                        <div class="hero__card-glow"></div>
+                    </div>
+
+                    <!-- Alpha AI Card -->
+                    <!-- <div class="hero__card hero__card--startup" data-magnetic>
+                        <div class="hero__card-content">
+                            <div class="hero__startup-badge">🚀</div>
+                            <div class="hero__startup-name">Alpha AI</div>
+                            <div class="hero__startup-role">Co-Founder</div>
+                            <div class="hero__startup-metric">60% Cost Reduction</div>
+                        </div>
+                        <div class="hero__card-glow"></div>
+                    </div> -->
+
+                    <!-- Tech Stack Card -->
+                    <div class="hero__card hero__card--tech" data-magnetic>
+                        <div class="hero__card-header">
+                            <span class="hero__tech-label">Tech Stack</span>
+                        </div>
+                        <div class="hero__tech-grid">
+                            <span class="hero__tech-item">React</span>
+                            <span class="hero__tech-item">Node.js</span>
+                            <span class="hero__tech-item">TypeScript</span>
+                            <span class="hero__tech-item">Python</span>
+                            <span class="hero__tech-item">AWS</span>
+                            <span class="hero__tech-item">PostgreSQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Description Card -->
+                    <div class="hero__card hero__card--description" data-magnetic>
+                        <div class="hero__card-content">
+                            <p class="hero__description-text">
+                                Building scalable applications and AI solutions that solve real business problems. 
+                                Specialized in reducing operational costs while enhancing user experiences.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Cards -->
+                    <div class="hero__card hero__card--cta-primary" data-magnetic>
+                        <a href="#works" class="hero__cta-link">
+                            <span class="hero__cta-text">View Projects</span>
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="hero__card hero__card--cta-secondary" data-magnetic>
+                        <a href="mailto:anant.garrgg@gmail.com" class="hero__cta-link">
+                            <span class="hero__cta-text">Get In Touch</span>
+                            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Scroll Indicator -->
+                <div class="hero__scroll-indicator">
+                    <div class="hero__scroll-text">Scroll to explore</div>
+                    <div class="hero__scroll-arrow">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Advanced About Section -->
+        <section class="about" id="about">
+            <!-- Floating Elements Background -->
+            <div class="about__floating">
+                <div class="about__float about__float--1"></div>
+                <div class="about__float about__float--2"></div>
+                <div class="about__float about__float--3"></div>
+            </div>
+
+            <div class="about__container">
+                <!-- Section Header -->
+                <div class="about__header">
+                    <div class="about__badge">
+                        <span className="about__badge-text">// About</span>
+                    </div>
+                    <h2 class="about__title">
+                        <span class="about__title-line">Crafting Digital</span>
+                        <span class="about__title-line">Experiences</span>
+                    </h2>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="about__grid">
+                    <!-- Bio Card -->
+                    <div class="about__card about__card--bio">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Bio</span>
+                        </div>
+                        <div class="about__bio">
+                            <p class="about__bio-text">
+                                Final-year B.Tech CSE student at <span class="about__highlight">Amity University</span>, 
+                                aspiring to be a Full-Stack and DevOps Engineer. Co-founder of <span class="about__highlight">Alpha AI</span>, 
+                                merging strong interests in AI/ML and strategic product design.
+                            </p>
+                            <p class="about__bio-text">
+                                Proven experience through successful development and deployment of multiple web projects. 
+                                Strong collaboration skills with hands-on expertise in cloud technologies and databases.
+                            </p>
+                        </div>
+                        <div class="about__card-footer">
+                            <div class="about__bio-status">
+                                <span class="about__bio-status-dot"></span>
+                                Currently studying • Working on Alpha AI
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education Timeline -->
+                    <div class="about__card about__card--education">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Education</span>
+                        </div>
+                        <div class="about__timeline">
+                            <div class="about__timeline-item about__timeline-item--active">
+                                <div class="about__timeline-dot"></div>
+                                <div class="about__timeline-content">
+                                    <div class="about__timeline-period">2022 - 2026</div>
+                                    <div class="about__timeline-title">B.Tech Computer Science</div>
+                                    <div class="about__timeline-subtitle">Amity University Haryana</div>
+                                    <div class="about__timeline-grade">CGPA: 7.5</div>
+                                </div>
+                            </div>
+                            <div class="about__timeline-item">
+                                <div class="about__timeline-dot"></div>
+                                <div class="about__timeline-content">
+                                    <div class="about__timeline-period">2023 - 2024</div>
+                                    <div class="about__timeline-title">Full Stack Development</div>
+                                    <div class="about__timeline-subtitle">100xDevs Cohort</div>
+                                </div>
+                            </div>
+                            <div class="about__timeline-item">
+                                <div class="about__timeline-dot"></div>
+                                <div class="about__timeline-content">
+                                    <div class="about__timeline-period">2022 - 2026</div>
+                                    <div class="about__timeline-title">Data Analytics Minor</div>
+                                    <div class="about__timeline-subtitle">Amity University</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Proficiency -->
+                    <div class="about__card about__card--tech">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Tech Proficiency</span>
+                        </div>
+                        <div class="about__skills">
+                            <div class="about__skill">
+                                <div class="about__skill-header">
+                                    <span class="about__skill-name">Frontend Development</span>
+                                    <span class="about__skill-level">92%</span>
+                                </div>
+                                <div class="about__skill-bar">
+                                    <div class="about__skill-progress" data-progress="92"></div>
+                                </div>
+                                <div class="about__skill-tags">
+                                    <span class="about__skill-tag">React</span>
+                                    <span class="about__skill-tag">TypeScript</span>
+                                    <span class="about__skill-tag">Next.js</span>
+                                </div>
+                            </div>
+
+                            <div class="about__skill">
+                                <div class="about__skill-header">
+                                    <span class="about__skill-name">Backend & DevOps</span>
+                                    <span class="about__skill-level">88%</span>
+                                </div>
+                                <div class="about__skill-bar">
+                                    <div class="about__skill-progress" data-progress="88"></div>
+                                </div>
+                                <div class="about__skill-tags">
+                                    <span class="about__skill-tag">Node.js</span>
+                                    <span class="about__skill-tag">AWS</span>
+                                    <span class="about__skill-tag">Docker</span>
+                                </div>
+                            </div>
+
+                            <div class="about__skill">
+                                <div class="about__skill-header">
+                                    <span class="about__skill-name">AI/ML & Data</span>
+                                    <span class="about__skill-level">85%</span>
+                                </div>
+                                <div class="about__skill-bar">
+                                    <div class="about__skill-progress" data-progress="85"></div>
+                                </div>
+                                <div class="about__skill-tags">
+                                    <span class="about__skill-tag">Python</span>
+                                    <span class="about__skill-tag">Machine Learning</span>
+                                    <span class="about__skill-tag">Data Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Achievements & Recognition -->
+                    <div class="about__card about__card--achievements">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Achievements</span>
+                        </div>
+                        <div class="about__achievements">
+                            <div class="about__achievement">
+                                <div class="about__achievement-icon">🚀</div>
+                                <div class="about__achievement-content">
+                                    <div class="about__achievement-title">Alpha AI Co-Founder</div>
+                                    <div class="about__achievement-desc">AI Search Engine Startup</div>
+                                </div>
+                            </div>
+                            <div class="about__achievement">
+                                <div class="about__achievement-icon">🏆</div>
+                                <div class="about__achievement-content">
+                                    <div class="about__achievement-title">Smart India Hackathon 2023</div>
+                                    <div class="about__achievement-desc">University Representative</div>
+                                </div>
+                            </div>
+                            <div class="about__achievement">
+                                <div class="about__achievement-icon">🎯</div>
+                                <div class="about__achievement-content">
+                                    <div class="about__achievement-title">Amity Innovathon Finalist</div>
+                                    <div class="about__achievement-desc">Grand Finale Round</div>
+                                </div>
+                            </div>
+                            <div class="about__achievement">
+                                <div class="about__achievement-icon">☁️</div>
+                                <div class="about__achievement-content">
+                                    <div class="about__achievement-title">Google Developers Group</div>
+                                    <div class="about__achievement-desc">Campus Cloud Lead</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Stats -->
+                    <div class="about__card about__card--stats">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Quick Stats</span>
+                        </div>
+                        <div class="about__stats-grid">
+                            <div class="about__stat" data-count="7.5">
+                                <div class="about__stat-value">7.5</div>
+                                <div class="about__stat-label">CGPA</div>
+                                <div class="about__stat-bar">
+                                    <div class="about__stat-fill" data-width="73"></div>
+                                </div>
+                            </div>
+                            <div class="about__stat" data-count="10">
+                                <div class="about__stat-value">10+</div>
+                                <div class="about__stat-label">Projects</div>
+                                <div class="about__stat-bar">
+                                    <div class="about__stat-fill" data-width="90"></div>
+                                </div>
+                            </div>
+                            <div class="about__stat" data-count="1">
+                                <div class="about__stat-value">1+</div>
+                                <div class="about__stat-label">Years Exp</div>
+                                <div class="about__stat-bar">
+                                    <div class="about__stat-fill" data-width="65"></div>
+                                </div>
+                            </div>
+                            <div class="about__stat" data-count="60">
+                                <div class="about__stat-value">0</div>
+                                <div class="about__stat-label">AI Cost ↓%</div>
+                                <div class="about__stat-bar">
+                                    <div class="about__stat-fill" data-width="60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Philosophy -->
+                    <div class="about__card about__card--philosophy">
+                        <div class="about__card-header">
+                            <div class="about__card-indicator"></div>
+                            <span class="about__card-title">Philosophy</span>
+                        </div>
+                        <div class="about__philosophy">
+                            <blockquote class="about__quote">
+                                "I believe in building technology that doesn't just work, but inspires. 
+                                Every line of code is an opportunity to create something meaningful."
+                            </blockquote>
+                            <div class="about__quote-author">
+                                <div class="about__quote-avatar"></div>
+                                <div class="about__quote-details">
+                                    <div class="about__quote-name">Anant Gupta</div>
+                                    <div class="about__quote-role">Full-Stack Developer</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Skills Showcase -->
+        <section class="section section--skills" id="section-4">
+            <div class="skills-container">
+                <div class="skill-col" data-col="1">
+                    <div class="skill-col__default">
+                        <div class="skill-col__number">00-1</div>
+                        <div class="skill-col__title">WEB DESIGN</div>
+                    </div>
+                    <div class="skill-col__expanded">
+                        <div class="skill-col__header">
+                            <div class="skill-col__number">00-1</div>
+                            <h3 class="skill-col__main-title">// WEB DESIGN</h3>
+                        </div>
+                        <div class="skill-col__content">
+                            <div class="skill-col__list">
+                                <div class="skill-item">/ MODERN LAYOUTS</div>
+                                <div class="skill-item">/ RESPONSIVE DESIGN</div>
+                                <div class="skill-item">/ INTERACTIVE UI</div>
+                                <div class="skill-item">/ PERFORMANCE OPTIMIZATION</div>
+                                <div class="skill-item">/ ACCESSIBILITY</div>
+                            </div>
+                            <div class="skill-col__image">
+                                <div class="placeholder-image">
+                                    <img src="./images/web design.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-col__description">
+                            <p>Creating stunning, user-focused web experiences that combine aesthetic appeal with functional design. Specializing in modern layouts, responsive frameworks, and interactive elements that engage users across all devices and platforms.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-col" data-col="2">
+                    <div class="skill-col__default">
+                        <div class="skill-col__number">00-2</div>
+                        <div class="skill-col__title">UX/UI DESIGN</div>
+                    </div>
+                    <div class="skill-col__expanded">
+                        <div class="skill-col__header">
+                            <div class="skill-col__number">00-2</div>
+                            <h3 class="skill-col__main-title">// UX/UI DESIGN</h3>
+                        </div>
+                        <div class="skill-col__content">
+                            <div class="skill-col__list">
+                                <div class="skill-item">/ USER RESEARCH</div>
+                                <div class="skill-item">/ WIREFRAMING</div>
+                                <div class="skill-item">/ PROTOTYPING</div>
+                                <div class="skill-item">/ USABILITY TESTING</div>
+                                <div class="skill-item">/ DESIGN SYSTEMS</div>
+                            </div>
+                            <div class="skill-col__image">
+                                <div class="placeholder-image">
+                                    <img src="./images/UI.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-col__description">
+                            <p>Designing intuitive user experiences through research-driven design processes. Creating wireframes, prototypes, and comprehensive design systems that prioritize user needs while achieving business objectives.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-col" data-col="3">
+                    <div class="skill-col__default">
+                        <div class="skill-col__number">00-3</div>
+                        <div class="skill-col__title">FRONTEND DEV</div>
+                    </div>
+                    <div class="skill-col__expanded">
+                        <div class="skill-col__header">
+                            <div class="skill-col__number">00-3</div>
+                            <h3 class="skill-col__main-title">// FRONTEND DEVELOPMENT</h3>
+                        </div>
+                        <div class="skill-col__content">
+                            <div class="skill-col__list">
+                                <div class="skill-item">/ REACT & VUE</div>
+                                <div class="skill-item">/ JAVASCRIPT ES6+</div>
+                                <div class="skill-item">/ TYPESCRIPT</div>
+                                <div class="skill-item">/ CSS FRAMEWORKS</div>
+                                <div class="skill-item">/ BUILD TOOLS</div>
+                            </div>
+                            <div class="skill-col__image">
+                                <div class="placeholder-image">
+                                    <img src="./images/Frontend.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-col__description">
+                            <p>Building robust, scalable frontend applications with modern JavaScript frameworks and tools. Expertise in component-based architecture, state management, and creating efficient, maintainable codebases.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-col" data-col="4">
+                    <div class="skill-col__default">
+                        <div class="skill-col__number">00-4</div>
+                        <div class="skill-col__title">BACKEND DEV</div>
+                    </div>
+                    <div class="skill-col__expanded">
+                        <div class="skill-col__header">
+                            <div class="skill-col__number">00-4</div>
+                            <h3 class="skill-col__main-title">// BACKEND DEVELOPMENT</h3>
+                        </div>
+                        <div class="skill-col__content">
+                            <div class="skill-col__list">
+                                <div class="skill-item">/ NODE.JS & EXPRESS</div>
+                                <div class="skill-item">/ DATABASE DESIGN</div>
+                                <div class="skill-item">/ API DEVELOPMENT</div>
+                                <div class="skill-item">/ CLOUD SERVICES</div>
+                                <div class="skill-item">/ SECURITY</div>
+                            </div>
+                            <div class="skill-col__image">
+                                <div class="placeholder-image">
+                                    <img src="./images/Backend.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-col__description">
+                            <p>Developing reliable server-side applications and APIs that power seamless user experiences. Specializing in scalable architecture, database optimization, and implementing robust security measures.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skill-col" data-col="5">
+                    <div class="skill-col__default">
+                        <div class="skill-col__number">00-5</div>
+                        <div class="skill-col__title">DEVOPS</div>
+                    </div>
+                    <div class="skill-col__expanded">
+                        <div class="skill-col__header">
+                            <div class="skill-col__number">00-5</div>
+                            <h3 class="skill-col__main-title">// DEVOPS</h3>
+                        </div>
+                        <div class="skill-col__content">
+                            <div class="skill-col__list">
+                                <div class="skill-item">/ CI/CD PIPELINES</div>
+                                <div class="skill-item">/ CONTAINERIZATION</div>
+                                <div class="skill-item">/ CLOUD DEPLOYMENT</div>
+                                <div class="skill-item">/ MONITORING</div>
+                                <div class="skill-item">/ AUTOMATION</div>
+                            </div>
+                            <div class="skill-col__image">  
+                                <div class="placeholder-image">
+                                    <img src="./images/devopes.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="skill-col__description">
+                            <p>Streamlining development workflows through automation and efficient deployment strategies. Implementing CI/CD pipelines, containerization, and monitoring systems that ensure reliable, scalable applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sections 5-6: Selected Works -->
+        <section class="works" id="works">
+            <div class="works__container">
+                <div class="works__header">
+                    <h2 class="works__title">Selected Works</h2>
+                    <p class="works__subtitle">A showcase of projects that define my expertise</p>
+                </div>
+                
+                <div class="works__content">
+                    <!-- Scroll Indicator -->
+                    <div class="works__scroll-indicator">
+                        <div class="works__scroll-hint">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="m9 18 6-6-6-6"/>
+                                <path d="M5 12h14"/>
+                            </svg>
+                            <span>Scroll horizontally to explore projects</span>
+                        </div>
+                    </div>
+                    
+                    <div class="works__scroll-container" id="worksScroll">
+                        
+                        <!-- Alpha AI Project -->
+                        <div class="work__item" data-project="alpha-ai">
+                            <div class="work__image">
+                                <div class="work__image-container">
+                                    <div class="work__placeholder">Alpha AI</div>
+                                    <div class="work__overlay"></div>
+                                </div>
+                            </div>
+                            <div class="work__content">
+                                <div class="work__header">
+                                    <h3 class="work__title">Alpha AI</h3>
+                                    <span class="work__category">AI Startup</span>
+                                </div>
+                                <p class="work__description">
+                                    Co-founded intelligent AI search engine startup that dynamically routes queries to optimal models, achieving 60% cost reduction and 60% latency improvement through innovative architecture.
+                                </p>
+                                <div class="work__tech">
+                                    <span class="work__tech-item">Llama</span>
+                                    <span class="work__tech-item">Mixtral</span>
+                                    <span class="work__tech-item">Gemma</span>
+                                    <span class="work__tech-item">Supabase</span>
+                                    <span class="work__tech-item">Tavily</span>
+                                </div>
+                                <!-- <div class="work__link">
+                                    <span class="work__link-text">View Project</span>
+                                    <span class="work__link-arrow">→</span>
+                                </div> -->
+                                <a href="https://v4-kappa-sable.vercel.app/" class="work__link" target="_blank" rel="noopener noreferrer">
+                                    <span class="work__link-text">View Project</span>
+                                    <span class="work__link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Infinite Feed Project -->
+                        <div class="work__item" data-project="infiFeed">
+                            <div class="work__image">
+                                <div class="work__image-container">
+                                    <div class="work__placeholder">InfiFeed</div>
+                                    <div class="work__overlay"></div>
+                                </div>
+                            </div>
+                            <div class="work__content">
+                                <div class="work__header">
+                                    <h3 class="work__title">InfiFeed</h3>
+                                    <span class="work__category">Social Media App</span>
+                                </div>
+                                <p class="work__description">
+                                    Full-stack social media application with real-time chat, image uploads, and interactive user feeds. Built for scale to handle infinite scroll content delivery and high user traffic.
+                                </p>
+                                <div class="work__tech">
+                                    <span class="work__tech-item">React</span>
+                                    <span class="work__tech-item">Node.js</span>
+                                    <span class="work__tech-item">PostgreSQL</span>
+                                    <span class="work__tech-item">Socket.io</span>
+                                </div>
+                                <a href="https://infi-feed.vercel.app/" class="work__link" target="_blank" rel="noopener noreferrer">
+                                    <span class="work__link-text">View Project</span>
+                                    <span class="work__link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- iPhone Clone Project -->
+                        <div class="work__item" data-project="iphone-clone">
+                            <div class="work__image">
+                                <div class="work__image-container">
+                                    <div class="work__placeholder">iPhone Clone</div>
+                                    <div class="work__overlay"></div>
+                                </div>
+                            </div>
+                            <div class="work__content">
+                                <div class="work__header">
+                                    <h3 class="work__title">iPhone Website Clone</h3>
+                                    <span class="work__category">Frontend Showcase</span>
+                                </div>
+                                <p class="work__description">
+                                    High-fidelity clone of the official iPhone website featuring pixel-perfect design, signature animations, and full responsiveness. Showcasing advanced front-end expertise.
+                                </p>
+                                <div class="work__tech">
+                                    <span class="work__tech-item">HTML5</span>
+                                    <span class="work__tech-item">CSS3</span>
+                                    <span class="work__tech-item">JavaScript</span>
+                                    <span class="work__tech-item">GSAP</span>
+                                </div>
+                                <a href="https://iphone-clone-silk.vercel.app/" class="work__link" target="_blank" rel="noopener noreferrer">
+                                    <span class="work__link-text">View Project</span>
+                                    <span class="work__link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Travel Booking Project -->
+                        <div class="work__item" data-project="travel-booking">
+                            <div class="work__image">
+                                <div class="work__image-container">
+                                    <div class="work__placeholder">Travel Booking</div>
+                                    <div class="work__overlay"></div>
+                                </div>
+                            </div>
+                            <div class="work__content">
+                                <div class="work__header">
+                                    <h3 class="work__title">Travel Booking System</h3>
+                                    <span class="work__category">Full-Stack App</span>
+                                </div>
+                                <p class="work__description">
+                                    Comprehensive travel booking system with user authentication, flight/hotel search functionality, and booking management features built with modern stack.
+                                </p>
+                                <div class="work__tech">
+                                    <span class="work__tech-item">MERN Stack</span>
+                                    <span class="work__tech-item">MySQL</span>
+                                    <span class="work__tech-item">REST APIs</span>
+                                    <span class="work__tech-item">JWT</span>
+                                </div>
+                                <a href="https://v4-kappa-sable.vercel.app/" class="work__link" target="_blank" rel="noopener noreferrer">
+                                    <span class="work__link-text">View Project</span>
+                                    <span class="work__link-arrow">→</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Process/Philosophy
+        <section class="process" id="process">
+            <div class="process__container">
+                <div class="process__header">
+                    <h2 class="process__title">My Process</h2>
+                    <p class="process__subtitle">How I approach every project</p>
+                </div>
+                
+                <div class="process__content">
+                    <svg class="process__path" id="processPath" viewBox="0 0 800 400">
+                        <path d="M50 350 Q200 50 400 200 Q600 350 750 50" stroke="#000" stroke-width="2" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+                    </svg>
+                    
+                    <div class="process__steps">
+                        <div class="process__step" data-step="1">
+                            <div class="process__step-number">01</div>
+                            <h3 class="process__step-title">Discovery</h3>
+                            <p class="process__step-description">Understanding the problem, target audience, and project requirements through research and stakeholder interviews.</p>
+                        </div>
+                        
+                        <div class="process__step" data-step="2">
+                            <div class="process__step-number">02</div>
+                            <h3 class="process__step-title">Design</h3>
+                            <p class="process__step-description">Creating wireframes, prototypes, and design systems that prioritize user experience and technical feasibility.</p>
+                        </div>
+                        
+                        <div class="process__step" data-step="3">
+                            <div class="process__step-number">03</div>
+                            <h3 class="process__step-title">Development</h3>
+                            <p class="process__step-description">Building scalable, performant solutions using modern technologies and best practices for maintainable code.</p>
+                        </div>
+                        
+                        <div class="process__step" data-step="4">
+                            <div class="process__step-number">04</div>
+                            <h3 class="process__step-title">Deploy</h3>
+                            <p class="process__step-description">Implementing CI/CD pipelines, cloud deployment, and monitoring systems for reliable production environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> -->
+
+        <!-- Section 8: Footer/Contact -->
+        <footer class="footer" id="footer">
+            <div class="footer__container">
+                <div class="footer__content">
+                    <div class="footer__header">
+                        <h2 class="footer__title">Let's Talk</h2>
+                        <p class="footer__subtitle">Ready to bring your ideas to life?</p>
+                    </div>
+                    
+                    <div class="footer__contact">
+                        <a href="mailto:anant.garrgg@gmail.com" class="footer__email" id="magneticButton">
+                            <span class="footer__email-text">Get In Touch</span>
+                            <div class="footer__email-circle">
+                                <span class="footer__email-arrow">→</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="footer__info">
+                        <div class="footer__links">
+                            <a href="https://github.com/guptaanant682" class="footer__link" target="_blank">GitHub</a>
+                            <a href="https://linkedin.com/in/anant-garrg/" class="footer__link" target="_blank">LinkedIn</a>
+                            <a href="tel:+917206390512" class="footer__link">+91 7206390512</a>
+                        </div>
+                        
+                        <div class="footer__location">
+                            <span>Jhajjar, Haryana</span>
+                            <span>India</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer__bottom">
+                    <p>&copy; 2024 Anant Gupta. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="portfolio.js"></script>
+</body>
+</html>
