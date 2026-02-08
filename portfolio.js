@@ -4,7 +4,20 @@
 class Portfolio {
     constructor() {
         this.isLoading = true;
+        this.isTouchDevice = this.detectTouchDevice();
+        this.isMobile = this.detectMobileDevice();
         this.init();
+    }
+    
+    detectTouchDevice() {
+        return ('ontouchstart' in window) || 
+               (navigator.maxTouchPoints > 0) || 
+               (navigator.msMaxTouchPoints > 0) ||
+               (window.matchMedia && window.matchMedia('(hover: none)').matches);
+    }
+    
+    detectMobileDevice() {
+        return window.innerWidth <= 768 || this.isTouchDevice;
     }
 
     init() {
@@ -18,16 +31,48 @@ class Portfolio {
 
     setup() {
         console.log('Portfolio setup starting...');
+        console.log('Touch device detected:', this.isTouchDevice);
+        console.log('Mobile device detected:', this.isMobile);
+        
+        // Initialize performance monitoring first
+        this.initPerformanceMonitoring();
+        
         this.setupPreloader();
         this.setupAdvancedNavbar();
-        this.setupAdvancedCursor();
+        
+        // Only setup cursor on non-touch devices
+        if (!this.isTouchDevice) {
+            this.setupAdvancedCursor();
+        } else {
+            // Ensure cursor is hidden and body has normal cursor
+            document.body.style.cursor = 'auto';
+            const cursor = document.getElementById('cursor');
+            if (cursor) cursor.style.display = 'none';
+        }
+        
         this.setupMagneticEffects();
         this.setupAdvancedHeroAnimations();
         this.setupAdvancedAboutAnimations();
         this.setupAdvancedProcessAnimations();
         this.setupWorkImages();
-        this.setup3DCarousel();
-        this.setupWorksScrollJacking();
+        
+        // Only setup 3D carousel on desktop
+        if (!this.isMobile) {
+            this.setup3DCarousel();
+        }
+        
+        // Setup touch-friendly skills interaction
+        this.setupTouchSkillsInteraction();
+        
+        // Only setup works scroll jacking on non-mobile devices
+        if (!this.isMobile) {
+            this.setupWorksScrollJacking();
+        } else {
+            console.log('Skipping GSAP scroll jacking on mobile device');
+        }
+        
+        // Add viewport height fix for mobile browsers
+        this.fixMobileViewportHeight();
         
         // Hide preloader after a shorter delay
         setTimeout(() => this.hidePreloader(), 1500);
@@ -127,9 +172,16 @@ class Portfolio {
         }, 800);
     }
 
-    // Advanced Custom Cursor
+    // Advanced Custom Cursor - Only for non-touch devices
     setupAdvancedCursor() {
         console.log('Setting up advanced cursor...');
+        
+        // Skip cursor setup on touch devices
+        if (this.isTouchDevice) {
+            console.log('Touch device detected, skipping cursor setup');
+            return;
+        }
+        
         this.cursor = document.getElementById('cursor');
         
         if (!this.cursor) {
@@ -140,6 +192,9 @@ class Portfolio {
         this.cursorPos = { x: 0, y: 0 };
         this.cursorTarget = { x: 0, y: 0 };
         
+        // Show cursor for non-touch devices
+        this.cursor.style.display = 'block';
+        
         // Smooth cursor movement with GSAP
         document.addEventListener('mousemove', (e) => {
             this.cursorTarget.x = e.clientX;
@@ -149,12 +204,21 @@ class Portfolio {
         // Smooth interpolation
         this.updateCursor();
         
-        // Enhanced hover states
-        const hoverElements = document.querySelectorAll('a, button, .hero__card, .work__item, .skill-col, .process__step');
+        // Enhanced hover states - Include all interactive elements
+        const hoverElements = document.querySelectorAll(`
+            a, button, 
+            .hero__card, .work__item, .skill-col, .process__step,
+            .navbar__link, .navbar__logo, .navbar__cta, .navbar__toggle,
+            .hero__cta-link, .work__link, .footer__link, .footer__email,
+            .about__card, .about__achievement, .hero__tech-item,
+            [data-magnetic], [href], [onclick]
+        `.replace(/\s+/g, ' ').trim());
         
         hoverElements.forEach(el => {
             el.addEventListener('mouseenter', () => {
-                this.cursor?.classList.add('is-hovering');
+                if (!this.cursor || this.isTouchDevice) return;
+                
+                this.cursor.classList.add('is-hovering');
                 if (typeof gsap !== 'undefined') {
                     gsap.to(this.cursor, {
                         scale: 1.5,
@@ -165,7 +229,9 @@ class Portfolio {
             });
             
             el.addEventListener('mouseleave', () => {
-                this.cursor?.classList.remove('is-hovering');
+                if (!this.cursor || this.isTouchDevice) return;
+                
+                this.cursor.classList.remove('is-hovering');
                 if (typeof gsap !== 'undefined') {
                     gsap.to(this.cursor, {
                         scale: 1,
@@ -178,13 +244,18 @@ class Portfolio {
     }
 
     updateCursor() {
-        if (!this.cursor) return;
+        if (!this.cursor || this.isTouchDevice) return;
         
-        // Smooth interpolation
-        this.cursorPos.x += (this.cursorTarget.x - this.cursorPos.x) * 0.15;
-        this.cursorPos.y += (this.cursorTarget.y - this.cursorPos.y) * 0.15;
+        // Smooth interpolation with better precision
+        this.cursorPos.x += (this.cursorTarget.x - this.cursorPos.x) * 0.2;
+        this.cursorPos.y += (this.cursorTarget.y - this.cursorPos.y) * 0.2;
         
-        this.cursor.style.transform = `translate(${this.cursorPos.x - 10}px, ${this.cursorPos.y - 10}px)`;
+        // Center the cursor properly (20px width/height from CSS)
+        const offsetX = this.cursorPos.x - 10;
+        const offsetY = this.cursorPos.y - 10;
+        
+        // Use transform3d for better GPU acceleration
+        this.cursor.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
         
         requestAnimationFrame(() => this.updateCursor());
     }
@@ -249,7 +320,7 @@ class Portfolio {
         }
     }
 
-    // Advanced Hero Animations Setup
+    // Advanced Hero Animations Setup - Performance Optimized
     setupAdvancedHeroAnimations() {
         console.log('Setting up advanced hero animations...');
         
@@ -258,7 +329,14 @@ class Portfolio {
             return;
         }
 
-        // Scroll-triggered animations for hero elements
+        // Reduce animations on mobile for performance
+        if (this.isMobile) {
+            console.log('Mobile device - using simplified animations');
+            this.setupSimplifiedHeroAnimations();
+            return;
+        }
+
+        // Full animations for desktop
         ScrollTrigger.create({
             trigger: '.hero__bento-grid',
             start: 'top 80%',
@@ -267,7 +345,7 @@ class Portfolio {
             }
         });
 
-        // Parallax effect for floating elements
+        // Parallax effect for floating elements (desktop only)
         gsap.to('.hero__particle', {
             y: '-30vh',
             ease: 'none',
@@ -277,6 +355,18 @@ class Portfolio {
                 end: 'bottom top',
                 scrub: true
             }
+        });
+    }
+    
+    // Simplified animations for mobile devices
+    setupSimplifiedHeroAnimations() {
+        // Simple fade-in animation for mobile
+        const cards = document.querySelectorAll('.hero__card');
+        cards.forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
         });
     }
 
@@ -721,6 +811,48 @@ class Portfolio {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         }
     }
+    
+    // Performance monitoring and optimization
+    initPerformanceMonitoring() {
+        // Reduce motion for users who prefer it
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.disableAnimations();
+        }
+        
+        // Monitor performance and reduce animations if needed
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            if (connection.effectiveType === 'slow-2g' || connection.effectiveType === '2g') {
+                console.log('Slow connection detected - reducing animations');
+                this.disableAnimations();
+            }
+        }
+    }
+    
+    disableAnimations() {
+        document.documentElement.style.setProperty('--ease-out-expo', 'none');
+        document.documentElement.style.setProperty('--ease-out-quart', 'none');
+        document.documentElement.style.setProperty('--ease-out-back', 'none');
+        
+        // Add a class to disable all transitions
+        document.body.classList.add('reduce-motion');
+    }
+    
+    // Fix mobile viewport height issues
+    fixMobileViewportHeight() {
+        if (this.isMobile) {
+            const setViewportHeight = () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            };
+            
+            setViewportHeight();
+            window.addEventListener('resize', setViewportHeight, { passive: true });
+            window.addEventListener('orientationchange', () => {
+                setTimeout(setViewportHeight, 100);
+            }, { passive: true });
+        }
+    }
 
     // GSAP Pinned Horizontal Scroll for Works Section
     setupWorksScrollJacking() {
@@ -747,10 +879,14 @@ class Portfolio {
             return;
         }
 
-        // Check if mobile device (disable pinning on mobile)
-        const isMobile = window.innerWidth <= 768;
-        if (isMobile) {
-            console.log('Mobile detected - GSAP pinning disabled');
+        // Enhanced mobile detection
+        if (this.isMobile || window.innerWidth <= 1024) {
+            console.log('Mobile/tablet detected - GSAP pinning disabled');
+            
+            // Ensure scroll container is not transformed on mobile
+            scrollContainer.style.transform = 'none';
+            scrollContainer.style.willChange = 'auto';
+            
             return;
         }
 
@@ -861,12 +997,19 @@ class Portfolio {
         });
     }
 
-    // Advanced About Section Animations
+    // Advanced About Section Animations - Performance Optimized
     setupAdvancedAboutAnimations() {
         console.log('Setting up advanced About animations...');
         
         if (typeof gsap === 'undefined') {
             console.warn('GSAP not loaded, skipping about animations');
+            return;
+        }
+
+        // Reduce animations on mobile for better performance
+        if (this.isMobile) {
+            console.log('Mobile device - using simplified about animations');
+            this.setupSimplifiedAboutAnimations();
             return;
         }
 
@@ -877,7 +1020,27 @@ class Portfolio {
         this.setupAboutStatsAnimation();
         this.setupAboutTimelineAnimation();
         this.setupAboutParallax();
-        this.setupAboutTypewriter();
+        this.setupAboutBioAnimation();
+    }
+    
+    // Simplified about animations for mobile
+    setupSimplifiedAboutAnimations() {
+        // Simple intersection observer for mobile
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.about__card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
     }
 
     setupAboutCardAnimations() {
@@ -1049,6 +1212,33 @@ class Portfolio {
         });
     }
 
+    // Smooth bio text animation without jitter
+    setupAboutBioAnimation() {
+        const bioTexts = document.querySelectorAll('.about__bio-text');
+        
+        bioTexts.forEach((text, index) => {
+            // Set initial state for smooth fade-in
+            gsap.set(text, {
+                opacity: 0,
+                y: 20
+            });
+            
+            // Smooth fade-in animation
+            gsap.to(text, {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: text,
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                },
+                delay: index * 0.2
+            });
+        });
+    }
+
     setupAboutTypewriter() {
         const bioTexts = document.querySelectorAll('.about__bio-text');
         
@@ -1161,6 +1351,52 @@ class Portfolio {
     }
 
 
+    // Touch-Friendly Skills Interaction
+    setupTouchSkillsInteraction() {
+        if (!this.isTouchDevice) {
+            console.log('Non-touch device, using hover interactions');
+            return;
+        }
+        
+        console.log('Setting up touch-friendly skills interaction...');
+        
+        const skillCols = document.querySelectorAll('.skill-col');
+        let activeSkill = null;
+        
+        skillCols.forEach((col, index) => {
+            // Add touch event listeners
+            col.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                this.handleSkillTouch(col, skillCols);
+            });
+            
+            col.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.handleSkillTouch(col, skillCols);
+            });
+        });
+        
+        // Close expanded skill when clicking outside
+        document.addEventListener('touchstart', (e) => {
+            const isSkillCol = e.target.closest('.skill-col');
+            if (!isSkillCol && activeSkill) {
+                activeSkill.classList.remove('active');
+                activeSkill = null;
+            }
+        });
+    }
+    
+    handleSkillTouch(col, allCols) {
+        // Remove active class from all columns
+        allCols.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked column
+        col.classList.add('active');
+        
+        // Store reference to active skill
+        this.activeSkill = col;
+    }
+    
     // Work Section Image Integration
     setupWorkImages() {
         const workItems = [
@@ -1175,7 +1411,20 @@ class Portfolio {
             const placeholderEl = workEl?.querySelector('.work__placeholder');
             
             if (placeholderEl) {
-                placeholderEl.innerHTML = `<img src="./images/works/${item.imageName}" alt="${item.imageName.split('.')[0]}" class="work__real-image">`;
+                // Add loading and error handling for images
+                const img = document.createElement('img');
+                img.src = `./images/works/${item.imageName}`;
+                img.alt = item.imageName.split('.')[0];
+                img.className = 'work__real-image';
+                img.loading = 'lazy'; // Lazy loading for performance
+                
+                img.onerror = () => {
+                    console.warn(`Failed to load image: ${item.imageName}`);
+                    placeholderEl.textContent = item.imageName.split('.')[0];
+                };
+                
+                placeholderEl.innerHTML = '';
+                placeholderEl.appendChild(img);
             }
         });
     }
@@ -1186,18 +1435,78 @@ class Portfolio {
 console.log('Initializing portfolio...');
 const portfolio = new Portfolio();
 
+// Add CSS for reduced motion and mobile viewport fixes
+if (!document.querySelector('#responsive-fixes-styles')) {
+    const style = document.createElement('style');
+    style.id = 'responsive-fixes-styles';
+    style.textContent = `
+        .reduce-motion *,
+        .reduce-motion *::before,
+        .reduce-motion *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+        
+        /* Mobile viewport height fix */
+        @media (max-width: 768px) {
+            .hero,
+            .works,
+            .footer {
+                min-height: calc(var(--vh, 1vh) * 100);
+            }
+        }
+        
+        /* Prevent zoom on iOS form inputs */
+        @supports (-webkit-touch-callout: none) {
+            input, select, textarea {
+                font-size: max(16px, 1rem);
+            }
+        }
+        
+        /* Improve touch targets */
+        @media (hover: none) {
+            .navbar__link,
+            .hero__cta-link,
+            .work__link,
+            .footer__link,
+            .skill-col {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
 // Expose to global scope for debugging
 window.portfolio = portfolio;
 
 // Handle window resize for responsive carousel and GSAP ScrollTrigger
 window.addEventListener('resize', () => {
+    // Update device detection on resize
+    portfolio.isMobile = portfolio.detectMobileDevice();
+    portfolio.isTouchDevice = portfolio.detectTouchDevice();
+    
     if (portfolio.handleResize) {
         portfolio.handleResize();
     }
     
-    // Refresh ScrollTrigger on resize
-    if (typeof ScrollTrigger !== 'undefined') {
+    // Only refresh ScrollTrigger on non-mobile devices
+    if (typeof ScrollTrigger !== 'undefined' && !portfolio.isMobile) {
         ScrollTrigger.refresh();
+    }
+    
+    // Handle cursor visibility on resize
+    if (portfolio.isTouchDevice && portfolio.cursor) {
+        portfolio.cursor.style.display = 'none';
+        document.body.style.cursor = 'auto';
+    } else if (!portfolio.isTouchDevice && portfolio.cursor) {
+        portfolio.cursor.style.display = 'block';
+        document.body.style.cursor = 'none';
     }
 }, { passive: true });
 

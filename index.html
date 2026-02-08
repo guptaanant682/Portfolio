@@ -2,12 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#f5f5f5">
     <title>Anant Gupta - Portfolio</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Prevent iOS zoom on form inputs -->
+    <style>
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+            select,
+            textarea,
+            input[type="text"],
+            input[type="password"],
+            input[type="datetime"],
+            input[type="datetime-local"],
+            input[type="date"],
+            input[type="month"],
+            input[type="time"],
+            input[type="week"],
+            input[type="number"],
+            input[type="email"],
+            input[type="url"],
+            input[type="search"],
+            input[type="tel"],
+            input[type="color"] {
+                font-size: 16px;
+            }
+        }
+        
+        /* Fix iOS Safari 100vh issues */
+        .hero,
+        .works,
+        .footer {
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+        }
+    </style>
     
     <!-- GSAP Core + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -64,21 +102,12 @@
             </div>
             
             <div class="navbar__actions">
-                <!-- <a href="/Resume/Flexible/Anant Gupta Resume.pdf" target="_blank" class="navbar__cta">
+                <a href="resume.pdf" download="Anant_Gupta_Resume.pdf" class="navbar__cta">
                     <span class="navbar__cta-text">Resume</span>
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-7 7h10a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
                     </svg>
-                </a> -->
-
-                <div class="navbar__actions">
-    <a href="resume.pdf" download="Anant_Gupta_Resume.pdf" class="navbar__cta">
-        <span class="navbar__cta-text">Resume</span>
-        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-7 7h10a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z"/>
-        </svg>
-    </a>
-</div>
+                </a>
             </div>
             
             <div class="navbar__toggle" id="navbarToggle">
@@ -135,19 +164,6 @@
                         </div>
                     </div>
 
-                    <!-- Experience Card -->
-                    <div class="hero__card hero__card--experience" data-magnetic>
-                        <div class="hero__card-icon">
-                            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                            </svg>
-                        </div>
-                        <div class="hero__card-content">
-                            <div class="hero__card-number" data-count="1">1+</div>
-                            <div class="hero__card-label">Years Experience</div>
-                        </div>
-                        <div class="hero__card-glow"></div>
-                    </div>
 
                     <!-- Projects Card -->
                     <div class="hero__card hero__card--projects" data-magnetic>
@@ -163,16 +179,6 @@
                         <div class="hero__card-glow"></div>
                     </div>
 
-                    <!-- Alpha AI Card -->
-                    <!-- <div class="hero__card hero__card--startup" data-magnetic>
-                        <div class="hero__card-content">
-                            <div class="hero__startup-badge">🚀</div>
-                            <div class="hero__startup-name">Alpha AI</div>
-                            <div class="hero__startup-role">Co-Founder</div>
-                            <div class="hero__startup-metric">60% Cost Reduction</div>
-                        </div>
-                        <div class="hero__card-glow"></div>
-                    </div> -->
 
                     <!-- Tech Stack Card -->
                     <div class="hero__card hero__card--tech" data-magnetic>
@@ -193,8 +199,8 @@
                     <div class="hero__card hero__card--description" data-magnetic>
                         <div class="hero__card-content">
                             <p class="hero__description-text">
-                                Building scalable applications and AI solutions that solve real business problems. 
-                                Specialized in reducing operational costs while enhancing user experiences.
+                                Computer Science student passionate about building scalable full-stack applications and AI solutions. 
+                                Focused on creating efficient, user-centered digital experiences with modern technologies.
                             </p>
                         </div>
                     </div>
@@ -219,15 +225,6 @@
                     </div>
                 </div>
 
-                <!-- Scroll Indicator -->
-                <div class="hero__scroll-indicator">
-                    <div class="hero__scroll-text">Scroll to explore</div>
-                    <div class="hero__scroll-arrow">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-                        </svg>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -244,7 +241,7 @@
                 <!-- Section Header -->
                 <div class="about__header">
                     <div class="about__badge">
-                        <span className="about__badge-text">// About</span>
+                        <span class="about__badge-text">// About</span>
                     </div>
                     <h2 class="about__title">
                         <span class="about__title-line">Crafting Digital</span>
@@ -262,13 +259,13 @@
                         </div>
                         <div class="about__bio">
                             <p class="about__bio-text">
-                                Final-year B.Tech CSE student at <span class="about__highlight">Amity University</span>, 
-                                aspiring to be a Full-Stack and DevOps Engineer. Co-founder of <span class="about__highlight">Alpha AI</span>, 
-                                merging strong interests in AI/ML and strategic product design.
+                                Final-year Computer Science Engineering student at <span class="about__highlight">Amity University</span> 
+                                with a passion for full-stack development and emerging technologies. Currently co-founding <span class="about__highlight">Alpha AI</span>, 
+                                combining technical expertise with innovative product development.
                             </p>
                             <p class="about__bio-text">
-                                Proven experience through successful development and deployment of multiple web projects. 
-                                Strong collaboration skills with hands-on expertise in cloud technologies and databases.
+                                Demonstrated experience in developing and deploying web applications using modern frameworks and cloud technologies. 
+                                Strong foundation in software engineering principles with focus on scalable architecture and user experience.
                             </p>
                         </div>
                         <div class="about__card-footer">
@@ -427,18 +424,11 @@
                                     <div class="about__stat-fill" data-width="90"></div>
                                 </div>
                             </div>
-                            <div class="about__stat" data-count="1">
-                                <div class="about__stat-value">1+</div>
-                                <div class="about__stat-label">Years Exp</div>
+                            <div class="about__stat" data-count="100">
+                                <div class="about__stat-value">100+</div>
+                                <div class="about__stat-label">GitHub Commits</div>
                                 <div class="about__stat-bar">
-                                    <div class="about__stat-fill" data-width="65"></div>
-                                </div>
-                            </div>
-                            <div class="about__stat" data-count="60">
-                                <div class="about__stat-value">0</div>
-                                <div class="about__stat-label">AI Cost ↓%</div>
-                                <div class="about__stat-bar">
-                                    <div class="about__stat-fill" data-width="60"></div>
+                                    <div class="about__stat-fill" data-width="85"></div>
                                 </div>
                             </div>
                         </div>
@@ -452,8 +442,8 @@
                         </div>
                         <div class="about__philosophy">
                             <blockquote class="about__quote">
-                                "I believe in building technology that doesn't just work, but inspires. 
-                                Every line of code is an opportunity to create something meaningful."
+                                "I believe in crafting technology solutions that not only function effectively but also create meaningful impact. 
+                                Every project is an opportunity to combine technical excellence with thoughtful design."
                             </blockquote>
                             <div class="about__quote-author">
                                 <div class="about__quote-avatar"></div>
@@ -491,7 +481,7 @@
                             </div>
                             <div class="skill-col__image">
                                 <div class="placeholder-image">
-                                    <img src="./images/web design.jpg" alt="">
+                                    <img src="./images/web design.jpg" alt="Web Design">
                                 </div>
                             </div>
                         </div>
@@ -521,7 +511,7 @@
                             </div>
                             <div class="skill-col__image">
                                 <div class="placeholder-image">
-                                    <img src="./images/UI.jpg" alt="">
+                                    <img src="./images/UI.jpg" alt="UX/UI Design">
                                 </div>
                             </div>
                         </div>
@@ -551,7 +541,7 @@
                             </div>
                             <div class="skill-col__image">
                                 <div class="placeholder-image">
-                                    <img src="./images/Frontend.jpg" alt="">
+                                    <img src="./images/Frontend.jpg" alt="Frontend Development">
                                 </div>
                             </div>
                         </div>
@@ -581,7 +571,7 @@
                             </div>
                             <div class="skill-col__image">
                                 <div class="placeholder-image">
-                                    <img src="./images/Backend.jpg" alt="">
+                                    <img src="./images/Backend.jpg" alt="Backend Development">
                                 </div>
                             </div>
                         </div>
@@ -611,7 +601,7 @@
                             </div>
                             <div class="skill-col__image">  
                                 <div class="placeholder-image">
-                                    <img src="./images/devopes.jpg" alt="">
+                                    <img src="./images/devopes.jpg" alt="DevOps">
                                 </div>
                             </div>
                         </div>
@@ -659,7 +649,7 @@
                                     <span class="work__category">AI Startup</span>
                                 </div>
                                 <p class="work__description">
-                                    Co-founded intelligent AI search engine startup that dynamically routes queries to optimal models, achieving 60% cost reduction and 60% latency improvement through innovative architecture.
+                                    Co-founded an AI-powered search platform that intelligently routes user queries to optimal language models. Built with modern web technologies to deliver enhanced search experiences through efficient architecture design.
                                 </p>
                                 <div class="work__tech">
                                     <span class="work__tech-item">Llama</span>
@@ -693,7 +683,7 @@
                                     <span class="work__category">Social Media App</span>
                                 </div>
                                 <p class="work__description">
-                                    Full-stack social media application with real-time chat, image uploads, and interactive user feeds. Built for scale to handle infinite scroll content delivery and high user traffic.
+                                    Comprehensive social media platform featuring real-time messaging, media sharing, and dynamic content feeds. Designed with scalable architecture to support seamless user interactions and content delivery.
                                 </p>
                                 <div class="work__tech">
                                     <span class="work__tech-item">React</span>
@@ -722,7 +712,7 @@
                                     <span class="work__category">Frontend Showcase</span>
                                 </div>
                                 <p class="work__description">
-                                    High-fidelity clone of the official iPhone website featuring pixel-perfect design, signature animations, and full responsiveness. Showcasing advanced front-end expertise.
+                                    Pixel-perfect recreation of Apple's iPhone website demonstrating advanced frontend development skills. Features smooth animations, responsive design, and modern web technologies for optimal user experience.
                                 </p>
                                 <div class="work__tech">
                                     <span class="work__tech-item">HTML5</span>
@@ -751,7 +741,7 @@
                                     <span class="work__category">Full-Stack App</span>
                                 </div>
                                 <p class="work__description">
-                                    Comprehensive travel booking system with user authentication, flight/hotel search functionality, and booking management features built with modern stack.
+                                    Full-featured travel booking platform with secure user authentication, search functionality, and booking management. Developed using MERN stack with focus on user experience and data security.
                                 </p>
                                 <div class="work__tech">
                                     <span class="work__tech-item">MERN Stack</span>
@@ -759,8 +749,8 @@
                                     <span class="work__tech-item">REST APIs</span>
                                     <span class="work__tech-item">JWT</span>
                                 </div>
-                                <a href="https://v4-kappa-sable.vercel.app/" class="work__link" target="_blank" rel="noopener noreferrer">
-                                    <span class="work__link-text">View Project</span>
+                                <a href="#" class="work__link" onclick="alert('Project demo coming soon!')">
+                                    <span class="work__link-text">Demo Coming Soon</span>
                                     <span class="work__link-arrow">→</span>
                                 </a>
                             </div>
