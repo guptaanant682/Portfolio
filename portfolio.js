@@ -21,6 +21,8 @@ class Portfolio {
     }
 
     init() {
+        // Native Smooth Scrolling handled by browser
+
         // Wait for DOM to be ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.setup());
@@ -40,25 +42,17 @@ class Portfolio {
         this.setupPreloader();
         this.setupAdvancedNavbar();
         
-        // Only setup cursor on non-touch devices
-        if (!this.isTouchDevice) {
-            this.setupAdvancedCursor();
-        } else {
-            // Ensure cursor is hidden and body has normal cursor
-            document.body.style.cursor = 'auto';
-            const cursor = document.getElementById('cursor');
-            if (cursor) cursor.style.display = 'none';
-        }
+        // Cursor is now completely handled by Native CSS override for 0ms lag
         
         this.setupMagneticEffects();
         this.setupAdvancedHeroAnimations();
         this.setupAdvancedAboutAnimations();
-        this.setupAdvancedProcessAnimations();
+        // Process animations completely handled by Native CSS hover for zero lag
         this.setupWorkImages();
         
-        // Only setup 3D carousel on desktop
+        // Setup 3D Infinity Logo on non-mobile devices
         if (!this.isMobile) {
-            this.setup3DCarousel();
+            this.setup3DInfinityLogo();
         }
         
         // Setup touch-friendly skills interaction
@@ -172,92 +166,36 @@ class Portfolio {
         }, 800);
     }
 
-    // Advanced Custom Cursor - Only for non-touch devices
+    // Advanced Custom Cursor - Scaled for Zero Latency
     setupAdvancedCursor() {
-        console.log('Setting up advanced cursor...');
+        console.log('Setting up zero-latency SVG cursor...');
         
-        // Skip cursor setup on touch devices
         if (this.isTouchDevice) {
             console.log('Touch device detected, skipping cursor setup');
             return;
         }
         
         this.cursor = document.getElementById('cursor');
+        if (!this.cursor || typeof gsap === 'undefined') return;
         
-        if (!this.cursor) {
-            console.log('Custom cursor element not found, skipping cursor setup');
-            return;
-        }
-        
-        this.cursorPos = { x: 0, y: 0 };
-        this.cursorTarget = { x: 0, y: 0 };
-        
-        // Show cursor for non-touch devices
         this.cursor.style.display = 'block';
         
-        // Smooth cursor movement with GSAP
-        document.addEventListener('mousemove', (e) => {
-            this.cursorTarget.x = e.clientX;
-            this.cursorTarget.y = e.clientY;
-        });
-        
-        // Smooth interpolation
-        this.updateCursor();
-        
-        // Enhanced hover states - Include all interactive elements
-        const hoverElements = document.querySelectorAll(`
-            a, button, 
-            .hero__card, .work__item, .skill-col, .process__step,
-            .navbar__link, .navbar__logo, .navbar__cta, .navbar__toggle,
-            .hero__cta-link, .work__link, .footer__link, .footer__email,
-            .about__card, .about__achievement, .hero__tech-item,
-            [data-magnetic], [href], [onclick]
-        `.replace(/\s+/g, ' ').trim());
-        
-        hoverElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                if (!this.cursor || this.isTouchDevice) return;
-                
-                this.cursor.classList.add('is-hovering');
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(this.cursor, {
-                        scale: 1.5,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                }
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                if (!this.cursor || this.isTouchDevice) return;
-                
-                this.cursor.classList.remove('is-hovering');
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(this.cursor, {
-                        scale: 1,
-                        duration: 0.3,
-                        ease: 'power2.out'
-                    });
-                }
-            });
-        });
-    }
+        // Create GSAP quickTo functions for ultimate performance
+        const xTo = gsap.quickTo(this.cursor, "x", {duration: 0.1, ease: "power3"});
+        const yTo = gsap.quickTo(this.cursor, "y", {duration: 0.1, ease: "power3"});
 
-    updateCursor() {
-        if (!this.cursor || this.isTouchDevice) return;
+        // Single passive event listener
+        window.addEventListener('mousemove', (e) => {
+            xTo(e.clientX);
+            yTo(e.clientY);
+        }, { passive: true });
         
-        // Smooth interpolation with better precision
-        this.cursorPos.x += (this.cursorTarget.x - this.cursorPos.x) * 0.2;
-        this.cursorPos.y += (this.cursorTarget.y - this.cursorPos.y) * 0.2;
-        
-        // Center the cursor properly (20px width/height from CSS)
-        const offsetX = this.cursorPos.x - 10;
-        const offsetY = this.cursorPos.y - 10;
-        
-        // Use transform3d for better GPU acceleration
-        this.cursor.style.transform = `translate3d(${offsetX}px, ${offsetY}px, 0)`;
-        
-        requestAnimationFrame(() => this.updateCursor());
+        // Hover states for interactive elements
+        const hoverElements = document.querySelectorAll('a, button, [data-magnetic], .hero__card, .work__item, .skill-col, .process__step');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => gsap.to(this.cursor, { scale: 1.5, duration: 0.2 }));
+            el.addEventListener('mouseleave', () => gsap.to(this.cursor, { scale: 1, duration: 0.2 }));
+        });
     }
 
     // Magnetic Effects for Cards
@@ -345,17 +283,6 @@ class Portfolio {
             }
         });
 
-        // Parallax effect for floating elements (desktop only)
-        gsap.to('.hero__particle', {
-            y: '-30vh',
-            ease: 'none',
-            scrollTrigger: {
-                trigger: '.hero',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            }
-        });
     }
     
     // Simplified animations for mobile devices
@@ -444,17 +371,8 @@ class Portfolio {
         // Create master timeline
         const tl = gsap.timeline({ delay: 0.5 });
         
-        // Set initial states and animate status bar entrance
-        tl.set('.hero__status-bar', { y: -50, opacity: 0 })
-        .to('.hero__status-bar', {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out'
-        })
-        
         // Set initial states and animate cards entrance
-        .set('.hero__card', { y: 60, opacity: 0, scale: 0.95 })
+        tl.set('.hero__card', { y: 60, opacity: 0, scale: 0.95 })
         .to('.hero__card', {
             y: 0,
             opacity: 1,
@@ -462,7 +380,7 @@ class Portfolio {
             duration: 0.8,
             stagger: 0.1,
             ease: 'power3.out'
-        }, '-=0.3')
+        })
         
         // Set initial states and animate name characters
         .set('.hero__char', { y: 100, opacity: 0 })
@@ -472,15 +390,7 @@ class Portfolio {
             duration: 0.6,
             stagger: 0.05,
             ease: 'back.out(1.7)'
-        }, '-=0.4')
-        
-        // Animate scroll indicator
-        .from('.hero__scroll-indicator', {
-            y: 30,
-            opacity: 0,
-            duration: 0.6,
-            ease: 'power2.out'
-        }, '-=0.2');
+        }, '-=0.4');
 
         // Counter animations for number cards
         this.animateCounters();
@@ -1269,83 +1179,35 @@ class Portfolio {
         }, delay);
     }
 
-    // Advanced Process Section Animations
+    // Advanced Process Section Animations V2
     setupAdvancedProcessAnimations() {
-        console.log('Setting up advanced Process animations...');
+        console.log('Setting up V2 Process animations...');
         
-        if (typeof gsap === 'undefined') {
-            console.warn('GSAP not loaded, skipping process animations');
+        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+            console.warn('GSAP/ScrollTrigger not loaded, skipping process animations');
             return;
         }
 
-        this.setupProcessPathAnimation();
-        this.setupProcessStepAnimations();
-    }
-
-    setupProcessPathAnimation() {
-        const path = document.getElementById('processPath');
-        const pathElement = path?.querySelector('path');
+        const steps = document.querySelectorAll('.process-v2__step');
         
-        if (!pathElement) return;
-
-        const pathLength = pathElement.getTotalLength();
-        
-        gsap.set(pathElement, {
-            strokeDasharray: pathLength,
-            strokeDashoffset: pathLength
-        });
-
-        gsap.to(pathElement, {
-            strokeDashoffset: 0,
-            duration: 2,
-            ease: "power2.inOut",
-            scrollTrigger: {
-                trigger: ".process",
-                start: "top center",
-                toggleActions: "play none none reverse"
-            }
-        });
-    }
-
-    setupProcessStepAnimations() {
-        const steps = document.querySelectorAll('.process__step');
-        
-        steps.forEach((step, index) => {
-            gsap.set(step, {
-                opacity: 0,
-                y: 50,
-                scale: 0.8
-            });
-            
-            gsap.to(step, {
+        steps.forEach((step) => {
+            gsap.fromTo(step, {
+                opacity: 0.1,
+                y: 100,
+                scale: 0.95
+            }, {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.7)",
+                duration: 0.8,
+                ease: "power3.out",
                 scrollTrigger: {
                     trigger: step,
-                    start: "top 80%",
+                    start: "top 75%", 
+                    end: "top 25%",    
+                    scrub: 1,
                     toggleActions: "play none none reverse"
-                },
-                delay: index * 0.2
-            });
-
-            // Hover effect
-            step.addEventListener('mouseenter', () => {
-                gsap.to(step, {
-                    scale: 1.05,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
-            });
-
-            step.addEventListener('mouseleave', () => {
-                gsap.to(step, {
-                    scale: 1,
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
+                }
             });
         });
     }
@@ -1429,6 +1291,124 @@ class Portfolio {
         });
     }
 
+    setup3DInfinityLogo() {
+        console.log('Setting up 3D Infinity Logo...');
+        const container = document.getElementById('canvas-container');
+        if (!container || typeof THREE === 'undefined') {
+            console.warn('Three.js or container not found for 3D logo.');
+            return;
+        }
+
+        // Scene setup
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+        this.renderer.setSize(container.clientWidth, container.clientHeight);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(this.renderer.domElement);
+
+        // Infinity Curve (Lemniscate)
+        class LemniscateCurve extends THREE.Curve {
+            constructor(scale = 1) {
+                super();
+                this.scale = scale;
+            }
+            getPoint(t, optionalTarget = new THREE.Vector3()) {
+                t = t * Math.PI * 2;
+                const a = 12; // Controls overall size
+                const denominator = 1 + Math.sin(t) ** 2;
+                const x = (a * Math.cos(t)) / denominator;
+                const y = (a * Math.sin(t) * Math.cos(t)) / denominator;
+                const z = Math.sin(t * 2) * 1.5; // Depth for 3D feel
+                
+                return optionalTarget.set(x, y, z).multiplyScalar(this.scale);
+            }
+        }
+
+        const path = new LemniscateCurve(0.35);
+        const geometry = new THREE.TubeGeometry(path, 150, 0.5, 20, true);
+        
+        // Premium Material for V5 - Pitch Black Solid
+        const material = new THREE.MeshStandardMaterial({
+            color: 0x000000,
+            metalness: 0.9,
+            roughness: 0.1,
+            transparent: false,
+            opacity: 1
+        });
+
+        this.logoMesh = new THREE.Mesh(geometry, material);
+        this.scene.add(this.logoMesh);
+
+        // Positioning
+        this.camera.position.z = 10;
+        this.logoMesh.position.set(0, 0, 0);
+
+        // Lighting for metallic look
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        this.scene.add(ambientLight);
+
+        const pointLight1 = new THREE.PointLight(0x0066ff, 1.5);
+        pointLight1.position.set(10, 10, 10);
+        this.scene.add(pointLight1);
+        
+        const pointLight2 = new THREE.PointLight(0xffffff, 1.0);
+        pointLight2.position.set(-10, -10, 10);
+        this.scene.add(pointLight2);
+
+        // Interaction
+        this.mouseX = 0;
+        this.mouseY = 0;
+        
+        // Base auto-rotation independent of mouse
+        this.baseRotationX = 0;
+        this.baseRotationY = 0;
+
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            if (this.isMobile) return;
+            // Dramatically increased sensitivity for WebGL cursor reactivity
+            this.mouseX = (event.clientX - windowHalfX) * 0.005;
+            this.mouseY = (event.clientY - windowHalfY) * 0.005;
+        });
+
+        // Resize handler
+        const onWindowResize = () => {
+            if(!this.camera || !this.renderer) return;
+            this.camera.aspect = container.clientWidth / container.clientHeight;
+            this.camera.updateProjectionMatrix();
+            this.renderer.setSize(container.clientWidth, container.clientHeight);
+        };
+        
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+             clearTimeout(resizeTimeout);
+             resizeTimeout = setTimeout(onWindowResize, 150);
+        }, { passive: true });
+
+        // Render Loop
+        const animate = () => {
+            this.logoAnimId = requestAnimationFrame(animate);
+            
+            // Fast continuous base rotation
+            this.baseRotationX += 0.005;
+            this.baseRotationY += 0.015;
+            
+            // Additive mouse offset constraints
+            const targetX = this.baseRotationX + (this.mouseY * 2.0);
+            const targetY = this.baseRotationY + (this.mouseX * 2.0);
+            
+            // Smoothly lerp towards compound target
+            this.logoMesh.rotation.x += (targetX - this.logoMesh.rotation.x) * 0.1;
+            this.logoMesh.rotation.y += (targetY - this.logoMesh.rotation.y) * 0.1;
+
+            this.renderer.render(this.scene, this.camera);
+        };
+        
+        animate();
+    }
 }
 
 // Initialize portfolio when DOM is ready

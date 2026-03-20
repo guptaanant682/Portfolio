@@ -2941,3 +2941,276 @@ body {
     height: 250px; /* Force a consistent height for alignment */
     overflow: hidden; /* Cut off anything that overflows */
 }
+
+/* --- Portfolio Optimization Fixes --- */
+
+/* Fix section clipping by fixed navbar */
+#about, #section-4, #works, #process, #footer {
+    scroll-margin-top: 80px; /* Offset for fixed navbar */
+}
+
+/* 3D Infinity Logo Canvas Container */
+.hero__canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: auto; /* Let it react to mouse */
+}
+
+.hero__canvas-container canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+}
+
+/* Fix vertical text clipping in Skills Section */
+.skill-col__title,
+.skill-col__main-title {
+    white-space: nowrap;
+    line-height: 1.2;
+    padding: 10px 0;
+    margin: 0;
+    display: inline-block;
+}
+
+/* --- V2 Hero Layout & Cursor Fixes --- */
+
+.hero__split {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 100vh;
+    padding-top: 80px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero__left {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 10;
+}
+
+.hero__right {
+    width: 50%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5;
+}
+
+.hero__canvas-container {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 120% !important;
+    height: 120vh !important;
+    z-index: 0;
+    pointer-events: auto !important;
+}
+
+/* Adjust the bento grid for the left side only */
+.hero__bento-grid--left {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 600px;
+}
+
+.hero__bento-grid--left .hero__card {
+    width: 100%;
+}
+
+@media (max-width: 968px) {
+    .hero__split {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-top: 100px;
+    }
+    .hero__left, .hero__right {
+        width: 100%;
+    }
+    .hero__right {
+        height: 400px;
+        order: -1;
+    }
+}
+
+/* ===== SECTION 9: GLOBAL NATIVE SVGs (V5 Perfect Infinity) ===== */
+*,
+*::before,
+*::after {
+    cursor: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 8C5.79086 8 4 9.79086 4 12C4 14.2091 5.79086 16 8 16C9.5539 16 10.8988 15.1065 11.5858 13.8443L12 13.0858L12.4142 13.8443C13.1012 15.1065 14.4461 16 16 16C18.2091 16 20 14.2091 20 12C20 9.79086 18.2091 8 16 8C14.4461 8 13.1012 8.89352 12.4142 10.1557L12 10.9142L11.5858 10.1557C10.8988 8.89352 9.5539 8 8 8Z" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>') 20 20, auto !important;
+}
+
+/* V4 Custom Geometry Offset Settings */
+.hero__canvas-container, .hero__right {
+    transform: translateY(-8vh) scale(1.1);
+}
+
+/* Ensure Process SVG path looks crisp */
+.process__path {
+    overflow: visible;
+}
+
+/* --- Process Section V3 UI (Ultra-Minimalist List Reveal) --- */
+.process-v3 {
+    padding: 15vh 5%;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    position: relative;
+    z-index: 5;
+}
+
+.process-v3__header {
+    margin-bottom: 10vh;
+}
+
+.process-v3__title {
+    font-size: clamp(3rem, 6vw, 6rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.process-v3__list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.process-v3__row {
+    display: flex;
+    align-items: center;
+    padding: 4vh 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background-color: transparent;
+}
+
+/* Background expanded color on hover */
+.process-v3__row::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(90deg, #f0f4ff 0%, transparent 100%);
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+}
+
+.process-v3__num {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #0066ff;
+    width: 10%;
+    flex-shrink: 0;
+    transition: transform 0.4s ease;
+}
+
+.process-v3__row-title {
+    font-size: clamp(2rem, 5vw, 5rem);
+    font-weight: 700;
+    margin: 0;
+    width: 30%;
+    flex-shrink: 0;
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.process-v3__desc {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(20px);
+    margin: 0;
+    padding-right: 2rem;
+    max-width: 600px;
+    width: 50%;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.process-v3__icon {
+    width: 10%;
+    display: flex;
+    justify-content: flex-end;
+    opacity: 0.3;
+    transition: all 0.4s ease;
+}
+
+/* Hover Interactions */
+.process-v3__row:hover {
+    padding: 6vh 0;
+    background: linear-gradient(90deg, #f8fafc 0%, #e2e8f0 100%);
+    box-shadow: inset 0 0 50px rgba(0, 102, 255, 0.05);
+    flex-wrap: wrap; /* Allows description to wrap under neatly */
+}
+
+.process-v3__row:hover::before {
+    opacity: 1;
+    transform: scaleY(1);
+    transform-origin: top;
+}
+
+.process-v3__row:hover .process-v3__num {
+    transform: translateX(20px);
+}
+
+.process-v3__row:hover .process-v3__row-title {
+    color: #0066ff;
+    transform: translateX(10px);
+}
+
+.process-v3__row:hover .process-v3__desc {
+    opacity: 1;
+    max-height: 200px;
+    flex-basis: 100%;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 1.5rem;
+    margin-left: max(5vw, 60px); /* Indent slightly past the number */
+}
+
+.process-v3__row:hover .process-v3__icon {
+    opacity: 1;
+    transform: rotate(-45deg) scale(1.2);
+    color: #0066ff;
+}
+
+@media (max-width: 968px) {
+    .process-v3__row {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4vh 0;
+    }
+    .process-v3__row-title {
+        width: 100%;
+        margin-top: 1vh;
+        margin-bottom: 2vh;
+    }
+    .process-v3__desc {
+        width: 100%;
+        opacity: 0.6;
+        transform: translateY(0);
+    }
+    .process-v3__icon {
+        display: none;
+    }
+    .process-v3__row:hover {
+        padding: 4vh 0;
+    }
+}

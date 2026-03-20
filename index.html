@@ -9,8 +9,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="theme-color" content="#f5f5f5">
     <title>Anant Gupta - Portfolio</title>
+    <!-- Dynamic SVG Favicon representing Infinity -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>♾️</text></svg>">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -50,6 +52,9 @@
     <!-- GSAP Core + ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <!-- Three.js for 3D Infinity Logo -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
     <!-- Preloader -->
@@ -64,11 +69,6 @@
             </div>
             <div class="preloader__line"></div>
         </div>
-    </div>
-
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor">
-        <div class="cursor__inner"></div>
     </div>
 
     <!-- Advanced Professional Navigation -->
@@ -124,20 +124,16 @@
             <!-- Animated Background -->
             <div class="hero__background">
                 <div class="hero__gradient"></div>
-                <div class="hero__floating-elements">
-                    <div class="hero__particle hero__particle--1"></div>
-                    <div class="hero__particle hero__particle--2"></div>
-                    <div class="hero__particle hero__particle--3"></div>
-                </div>
             </div>
             
-            <div class="hero__container">
-
-
-                <!-- Bento Grid Layout -->
-                <div class="hero__bento-grid">
-                    <!-- Main Identity Card -->
-                    <div class="hero__card hero__card--main" data-magnetic>
+            <div class="hero__container hero__split">
+                <!-- Left Content Area -->
+                <div class="hero__left">
+                
+                    <!-- Bento Grid Layout modified for left column -->
+                    <div class="hero__bento-grid hero__bento-grid--left">
+                        <!-- Main Identity Card -->
+                        <div class="hero__card hero__card--main" data-magnetic>
                         <div class="hero__card-content">
                             <div class="hero__greeting">
                                 <span class="hero__greeting-text">Hi, I'm</span>
@@ -223,6 +219,12 @@
                             </svg>
                         </a>
                     </div>
+                    </div> <!-- End Grid -->
+                </div> <!-- End Left Content Area -->
+                
+                <!-- Right Visual Area for 3D Logo -->
+                <div class="hero__right">
+                    <div id="canvas-container" class="hero__canvas-container" aria-label="3D Infinity Logo"></div>
                 </div>
 
             </div>
@@ -622,16 +624,7 @@
                 </div>
                 
                 <div class="works__content">
-                    <!-- Scroll Indicator -->
-                    <div class="works__scroll-indicator">
-                        <div class="works__scroll-hint">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="m9 18 6-6-6-6"/>
-                                <path d="M5 12h14"/>
-                            </svg>
-                            <span>Scroll horizontally to explore projects</span>
-                        </div>
-                    </div>
+                    <!-- Scroll Indicator Removed in V4 -->
                     
                     <div class="works__scroll-container" id="worksScroll">
                         
@@ -761,47 +754,58 @@
             </div>
         </section>
 
-        <!-- Section 7: Process/Philosophy
-        <section class="process" id="process">
-            <div class="process__container">
-                <div class="process__header">
-                    <h2 class="process__title">My Process</h2>
-                    <p class="process__subtitle">How I approach every project</p>
+        <!-- Section 7: Ultra-Minimalist List Reveal Process -->
+        <section class="process-v3" id="process">
+            <div class="process-v3__header">
+                <h2 class="process-v3__title">My Process</h2>
+            </div>
+            
+            <div class="process-v3__list">
+                <div class="process-v3__row">
+                    <span class="process-v3__num">01.</span>
+                    <h3 class="process-v3__row-title">DISCOVERY</h3>
+                    <p class="process-v3__desc">Deep diving into the problem space, target audience, and core requirements to establish a perfect blueprint.</p>
+                    <div class="process-v3__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                        </svg>
+                    </div>
                 </div>
                 
-                <div class="process__content">
-                    <svg class="process__path" id="processPath" viewBox="0 0 800 400">
-                        <path d="M50 350 Q200 50 400 200 Q600 350 750 50" stroke="#000" stroke-width="2" fill="none" stroke-dasharray="1000" stroke-dashoffset="1000"/>
-                    </svg>
-                    
-                    <div class="process__steps">
-                        <div class="process__step" data-step="1">
-                            <div class="process__step-number">01</div>
-                            <h3 class="process__step-title">Discovery</h3>
-                            <p class="process__step-description">Understanding the problem, target audience, and project requirements through research and stakeholder interviews.</p>
-                        </div>
-                        
-                        <div class="process__step" data-step="2">
-                            <div class="process__step-number">02</div>
-                            <h3 class="process__step-title">Design</h3>
-                            <p class="process__step-description">Creating wireframes, prototypes, and design systems that prioritize user experience and technical feasibility.</p>
-                        </div>
-                        
-                        <div class="process__step" data-step="3">
-                            <div class="process__step-number">03</div>
-                            <h3 class="process__step-title">Development</h3>
-                            <p class="process__step-description">Building scalable, performant solutions using modern technologies and best practices for maintainable code.</p>
-                        </div>
-                        
-                        <div class="process__step" data-step="4">
-                            <div class="process__step-number">04</div>
-                            <h3 class="process__step-title">Deploy</h3>
-                            <p class="process__step-description">Implementing CI/CD pipelines, cloud deployment, and monitoring systems for reliable production environments.</p>
-                        </div>
+                <div class="process-v3__row">
+                    <span class="process-v3__num">02.</span>
+                    <h3 class="process-v3__row-title">DESIGN</h3>
+                    <p class="process-v3__desc">Crafting scalable wireframes, premium prototypes, and robust design systems that prioritize user experience.</p>
+                    <div class="process-v3__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="process-v3__row">
+                    <span class="process-v3__num">03.</span>
+                    <h3 class="process-v3__row-title">DEVELOPMENT</h3>
+                    <p class="process-v3__desc">Building ultra-fast, performant, and flawless code using state-of-the-art modern web technologies.</p>
+                    <div class="process-v3__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="process-v3__row">
+                    <span class="process-v3__num">04.</span>
+                    <h3 class="process-v3__row-title">DEPLOYMENT</h3>
+                    <p class="process-v3__desc">Launching scale-ready applications with robust CI/CD, advanced cloud integration, and monitoring pipelines.</p>
+                    <div class="process-v3__icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7" />
+                        </svg>
                     </div>
                 </div>
             </div>
-        </section> -->
+        </section>
 
         <!-- Section 8: Footer/Contact -->
         <footer class="footer" id="footer">
@@ -843,6 +847,6 @@
 
     </main>
 
-    <script src="portfolio.js"></script>
+    <script src="portfolio.js?v=9"></script>
 </body>
 </html>
