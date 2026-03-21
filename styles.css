@@ -2526,6 +2526,23 @@ body {
     transform: translateX(var(--spacing-xs));
 }
 
+/* Static label (non-clickable) for internship work items */
+.work__link--static {
+    cursor: default;
+    opacity: 0.6;
+    pointer-events: none;
+    background: rgba(0,0,0,0.06);
+    border: 1px solid rgba(0,0,0,0.12);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 6px;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+}
+
+.work__link--static:hover {
+    transform: none;
+}
+
 /* Process Section */
 .process {
     position: relative;
